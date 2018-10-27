@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<link rel="stylesheet" href="http://apps.bdimg.com/libs/bootstrap/3.3.4/css/bootstrap.min.css">
+<script src="http://apps.bdimg.com/libs/angular.js/1.4.6/angular.min.js"></script>
+<body ng-app="myApp" ng-controller="userCtrl">
+        <form novalidate="novalidate" name="loginForm">
+                <div class="form-group">
+                    <label for="lemail">Account</label>
+                    <input type="email"
+                           class="form-control my-input"
+                           id="lemail"
+                           placeholder="Enter your account"
+                           name="lemail"
+                           required="required"
+                           ng-minlength="6"
+                           ng-maxlength="18"
+                           ng-model="login_user.email"
+                           email-check-login>
+            
+                    <div ng-cloak ng-if="loginForm.lemail.$dirty&&loginForm.lemail.$invalid">
+                        <span class="error" ng-if="loginForm.lemail.$error.required">
+                            Your account is required.
+                        </span>
+                        <span class="error" ng-if="!loginForm.lemail.$error.minlength&&!loginForm.lemail.$error.maxlength&&loginForm.lemail.$error.email">
+                            It is not a valid account.
+                        </span>
+                        <span class="error" ng-if="loginForm.lemail.$error.minlength">
+                            Your account is required to be at least 6 characters.
+                        </span>
+                        <span class="error" ng-if="loginForm.lemail.$error.maxlength">
+                            Your account cannot be longer than 18 characters.
+                        </span>
+                        <span class="error" ng-if="!loginForm.lemail.$error.email&&loginForm.lemail.$error.email_error">
+                            Your account does not exist.
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="lpassword">Password</label>
+                    <input type="password"
+                           class="form-control my-input"
+                           id="lpassword"
+                           placeholder="Enter your password"
+                           name="lpassword"
+                           required="required"
+                           ng-minlength="6"
+                           ng-maxlength="18"
+                           ng-model="login_user.password">
+            
+                    <div ng-cloak ng-if="loginForm.lpassword.$dirty&&loginForm.lpassword.$invalid">
+                        <span class="error" ng-if="loginForm.lpassword.$error.required">
+                            Your password is required.
+                        </span>
+                        <span class="error" ng-if="!loginForm.lpassword.$error.minlength&&!loginForm.lpassword.$error.maxlength&&loginForm.lpassword.$error.password">
+                            It is not a valid password.
+                        </span>
+                        <span class="error" ng-if="loginForm.lpassword.$error.minlength">
+                            Your password is required to be at least 6 characters.
+                        </span>
+                        <span class="error" ng-if="loginForm.lpassword.$error.maxlength">
+                            Your password cannot be longer than 18 characters.
+                        </span>
+                    </div>
+                </div>
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="remember-me" ng-model="login_user.remember_me">
+                    <label class="form-check-label" for="remember-me">Remember me, <em>validity will last for one week.</em></label>
+                </div>
+                <button type="submit" class="mt-15 btn btn-primary btn-block" ng-disabled="loginForm.$invalid">Login</button>
+            </form>
+</body>
+</html>

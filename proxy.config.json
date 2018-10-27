@@ -1,0 +1,6 @@
+{
+    "/tz":{
+        "target":"http://localhost",
+        "secure":false
+    }
+}
