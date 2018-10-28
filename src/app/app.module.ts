@@ -1,6 +1,5 @@
 import { NgModule }       from '@angular/core';
 import { BrowserModule }  from '@angular/platform-browser';
-import { FormsModule }    from '@angular/forms';
 
 import { AppComponent }         from './app.component';
 import { DashboardComponent }   from './dashboard/dashboard.component';
@@ -13,6 +12,15 @@ import { LoginComponent } from './login/login.component';
 import { HttpClientModule }    from '@angular/common/http';
 import { HeroSearchComponent } from './hero-search/hero-search.component';
 import { ConfigComponent } from './config/config.component';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {NoopAnimationsModule} from '@angular/platform-browser/animations';
+import { MaterialComponent } from './material/material.component';
+import {MatButtonModule, MatCheckboxModule} from '@angular/material';
+import { NgZorroAntdModule, NZ_I18N, zh_CN } from 'ng-zorro-antd';
+import { registerLocaleData } from '@angular/common';
+import zh from '@angular/common/locales/zh';
+import { FormsModule,ReactiveFormsModule } from '@angular/forms';
+registerLocaleData(zh);
 
 @NgModule({
   imports: [
@@ -20,7 +28,15 @@ import { ConfigComponent } from './config/config.component';
     FormsModule,
     AppRoutingModule,
     HttpClientModule,
+    BrowserAnimationsModule,
+    NoopAnimationsModule,
+    MatButtonModule,
+    MatCheckboxModule,
+    NgZorroAntdModule,
+    FormsModule,
+    ReactiveFormsModule ,
   ],
+  exports: [MatButtonModule, MatCheckboxModule],
   declarations: [
     AppComponent,
     DashboardComponent,
@@ -29,8 +45,10 @@ import { ConfigComponent } from './config/config.component';
     MessagesComponent,
     LoginComponent,
     HeroSearchComponent,
-    ConfigComponent
+    ConfigComponent,
+    MaterialComponent
   ],
-  bootstrap: [ AppComponent ]
+  bootstrap: [ AppComponent ],
+  providers: [{ provide: NZ_I18N, useValue: zh_CN }]
 })
 export class AppModule { }
