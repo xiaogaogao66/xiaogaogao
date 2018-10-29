@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../user';
 import { Router } from '@angular/router';
-import { HeroService } from '../hero.service';
+import { LoginService } from './login.service';
 
 import {
   AbstractControl,
@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
     this.validateForm.controls[i].updateValueAndValidity();
     }
     if (this.validateForm.valid) {
-        this.heroService.login(this.user).subscribe(res => { this.result = res
+        this.loginService.login(this.user).subscribe(res => { this.result = res
             if (this.result.result == "Y") {
                   this.router.navigateByUrl("index");
             } else if (this.result.result == "N") {
@@ -40,7 +40,7 @@ export class LoginComponent implements OnInit {
       });
     }
     }
-    constructor(private fb: FormBuilder, private heroService: HeroService, private router: Router){}
+    constructor(private fb: FormBuilder, private loginService: LoginService, private router: Router){}
   ngOnInit(): void {
     this.validateForm = this.fb.group({
       userName: [ null, [ Validators.required ] ],

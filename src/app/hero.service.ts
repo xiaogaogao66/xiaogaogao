@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 
 import { Observable, of } from 'rxjs';
-import { User } from './user';
 import { Hero } from './hero';
 import { MessageService } from './message.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -16,7 +15,7 @@ export class HeroService {
   private heroesUrl4 = 'angulardemo/addhero';  // URL to web api
   private heroesUrl5 = 'angulardemo/updatehero';  // URL to web api
   private heroesUrl6 = 'angulardemo/deletehero';  // URL to web api
-  private heroesUrl7 = 'angulardemo/login';
+
   constructor(
     private http: HttpClient,
     private messageService: MessageService) { }
@@ -26,10 +25,7 @@ export class HeroService {
     }
 
   
-login(user:User): Observable<any> {
-  const url = `${this.heroesUrl7}`;
-  return this.http.post(url, user);
-}
+
 /** GET heroes from the server */
 getHeroes (): Observable<Hero[]> {
   return this.http.get<Hero[]>(this.heroesUrl2)
@@ -89,7 +85,7 @@ searchHeroes(term: string): Observable<Hero[]> {
     catchError(this.handleError<Hero[]>('searchHeroes', []))
   );
 }
-  /**
+/**
  * Handle Http operation that failed.
  * Let the app continue.
  * @param operation - name of the operation that failed
