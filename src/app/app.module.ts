@@ -20,6 +20,7 @@ import { NgZorroAntdModule, NZ_I18N, zh_CN } from 'ng-zorro-antd';
 import { registerLocaleData } from '@angular/common';
 import zh from '@angular/common/locales/zh';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
+import { IndexComponent } from './index/index.component';
 registerLocaleData(zh);
 
 @NgModule({
@@ -46,7 +47,8 @@ registerLocaleData(zh);
     LoginComponent,
     HeroSearchComponent,
     ConfigComponent,
-    MaterialComponent
+    MaterialComponent,
+    IndexComponent
   ],
   bootstrap: [ AppComponent ],
   providers: [{ provide: NZ_I18N, useValue: zh_CN }]

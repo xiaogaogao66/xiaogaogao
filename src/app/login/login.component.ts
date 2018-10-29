@@ -1,9 +1,13 @@
 import { Component, OnInit } from '@angular/core';
+import { User } from '../user';
+import { Router } from '@angular/router';
+import { HeroService } from '../hero.service';
+
 import {
   AbstractControl,
   FormBuilder,
   FormGroup,
-  Validators
+  Validators,
 } from '@angular/forms';
 
 @Component({
@@ -13,17 +17,30 @@ import {
 })
 export class LoginComponent implements OnInit {
   validateForm: FormGroup;
+  result: any = {};
+  user: User = {
+    id:0,
+    name: "",
+    password: ""
+    }
+
 
   submitForm(): void {
     for (const i in this.validateForm.controls) {
-      this.validateForm.controls[ i ].markAsDirty();
-      this.validateForm.controls[ i ].updateValueAndValidity();
+    this.validateForm.controls[i].markAsDirty();
+    this.validateForm.controls[i].updateValueAndValidity();
     }
-  }
-
-  constructor(private fb: FormBuilder) {
-  }
-
+    if (this.validateForm.valid) {
+        this.heroService.login(this.user).subscribe(res => { this.result = res
+            if (this.result.result == "Y") {
+                  this.router.navigateByUrl("index");
+            } else if (this.result.result == "N") {
+                   alert("登录失败！");
+          }
+      });
+    }
+    }
+    constructor(private fb: FormBuilder, private heroService: HeroService, private router: Router){}
   ngOnInit(): void {
     this.validateForm = this.fb.group({
       userName: [ null, [ Validators.required ] ],

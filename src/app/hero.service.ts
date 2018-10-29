@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
 
 import { Observable, of } from 'rxjs';
-
+import { User } from './user';
 import { Hero } from './hero';
-import { HEROES } from './mock-heroes';
 import { MessageService } from './message.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
@@ -12,11 +11,12 @@ import { catchError, map, tap } from 'rxjs/operators';
 @Injectable({ providedIn: 'root' })
 export class HeroService {
   private heroesUrl = 'api/heroes';  // URL to web api
-  private heroesUrl2 = 'tz/getheros';  // URL to web api
-  private heroesUrl3 = 'tz/sreachname';  // URL to web api
-  private heroesUrl4 = 'tz/addhero';  // URL to web api
-  private heroesUrl5 = 'tz/updatehero';  // URL to web api
-  private heroesUrl6 = 'tz/deletehero';  // URL to web api
+  private heroesUrl2 = 'angulardemo/getheros';  // URL to web api
+  private heroesUrl3 = 'angulardemo/sreachname';  // URL to web api
+  private heroesUrl4 = 'angulardemo/addhero';  // URL to web api
+  private heroesUrl5 = 'angulardemo/updatehero';  // URL to web api
+  private heroesUrl6 = 'angulardemo/deletehero';  // URL to web api
+  private heroesUrl7 = 'angulardemo/login';
   constructor(
     private http: HttpClient,
     private messageService: MessageService) { }
@@ -24,6 +24,12 @@ export class HeroService {
     private log(message: string) {
       this.messageService.add(`HeroService: ${message}`);
     }
+
+  
+login(user:User): Observable<any> {
+  const url = `${this.heroesUrl7}`;
+  return this.http.post(url, user);
+}
 /** GET heroes from the server */
 getHeroes (): Observable<Hero[]> {
   return this.http.get<Hero[]>(this.heroesUrl2)
